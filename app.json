@@ -2,14 +2,11 @@
   "expo": {
     "name": "Secure Transaction App",
     "slug": "transaction",
-    "privacy": "public",
-    "sdkVersion": "35.0.0",
-    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/gradell.jpeg",
+    "icon": "./assets/AppIcon/splash.png",
     "splash": {
-      "image": "./assets/images/gradell.jpeg",
+      "image": "./assets/AppIcon/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#062b50"
     },
