@@ -1,67 +1,71 @@
-import { PropTypes } from 'prop-types';
-import React, { Component } from 'react';
-import { Animated, Dimensions, Keyboard, StyleSheet, TextInput, UIManager } from 'react-native';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  Dimensions,
+  Keyboard,
+  findNodeHandle
+} from "react-native";
 
-const { State: TextInputState } = TextInput;
+const KeyboardShift = ({ children }) => {
+  const shift = useRef(new Animated.Value(0)).current;
+  const [focusedInput, setFocusedInput] = useState(null); // State to track the currently focused TextInput
 
-export default class KeyboardShift extends Component {
-  state = {
-    shift: new Animated.Value(0),
-  };
-
-  componentWillMount() {
-    this.keyboardDidShowSub = Keyboard.addListener('keyboardDidShow', this.handleKeyboardDidShow);
-    this.keyboardDidHideSub = Keyboard.addListener('keyboardDidHide', this.handleKeyboardDidHide);
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidShowSub.remove();
-    this.keyboardDidHideSub.remove();
-  }
-
-  render() {
-    const { children: renderProp } = this.props;
-    const { shift } = this.state;
-    return (
-      <Animated.View style={[styles.container, { transform: [{translateY: shift}] }]}>
-        {renderProp()}
-      </Animated.View>
+  useEffect(() => {
+    const showSub = Keyboard.addListener("keyboardDidShow", (event) =>
+      handleKeyboardDidShow(event, focusedInput)
     );
-  }
+    const hideSub = Keyboard.addListener(
+      "keyboardDidHide",
+      handleKeyboardDidHide
+    );
 
-  handleKeyboardDidShow = (event) => {
-    const { height: windowHeight } = Dimensions.get('window');
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
+  }, [focusedInput]); // Depend on focusedInput to re-register listeners when it changes
+
+  const handleKeyboardDidShow = (event, focusedInputRef) => {
+    if (!focusedInputRef) return;
+
+    const { height: windowHeight } = Dimensions.get("window");
     const keyboardHeight = event.endCoordinates.height;
-    const currentlyFocusedField = TextInputState.currentlyFocusedField();
-    UIManager.measure(currentlyFocusedField, (originX, originY, width, height, pageX, pageY) => {
-      const fieldHeight = height;
-      const fieldTop = pageY;
-      const gap = (windowHeight - keyboardHeight) - (fieldTop + fieldHeight);
-      if (gap >= 0) {
-        return;
-      }
-      Animated.timing(
-        this.state.shift,
-        {
+    const currentlyFocusedField = findNodeHandle(focusedInputRef);
+
+    if (currentlyFocusedField) {
+      focusedInputRef.measureInWindow((x, y, width, height) => {
+        const fieldHeight = height;
+        const fieldTop = y;
+        const { height: windowHeight } = Dimensions.get("window");
+        const keyboardHeight = event.endCoordinates.height;
+        const gap = windowHeight - keyboardHeight - (fieldTop + fieldHeight);
+        if (gap >= 0) {
+          return;
+        }
+        Animated.timing(shift, {
           toValue: gap,
           duration: 1000,
           useNativeDriver: true,
-        }
-      ).start();
-    });
-  }
+        }).start();
+      });
+    }
+  };
 
-  handleKeyboardDidHide = () => {
-    Animated.timing(
-      this.state.shift,
-      {
-        toValue: 0,
-        duration: 1000,
-        useNativeDriver: true,
-      }
-    ).start();
-  }
-}
+  const handleKeyboardDidHide = () => {
+    Animated.timing(shift, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return (
+    <Animated.View style={[{ transform: [{ translateY: shift }] }]}>
+      {children()}
+    </Animated.View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -69,10 +73,12 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
     top: 0,
-    width: '100%'
-  }
+    width: '100%',
+  },
 });
 
 KeyboardShift.propTypes = {
   children: PropTypes.func.isRequired,
 };
+
+export default KeyboardShift;

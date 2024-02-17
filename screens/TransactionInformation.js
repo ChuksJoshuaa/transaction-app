@@ -1,8 +1,8 @@
+import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import React, { Component } from 'react';
-import { TouchableOpacity, Image, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { Header, Left, Right, Icon, Body, Title, Button } from 'native-base';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
-import { Block, Card, Text, IconImage, Label } from '../components';
+import { Block, Card, Text } from '../components';
 import * as theme from '../constants/theme';
 
 const styles = StyleSheet.create({

@@ -1,67 +1,34 @@
-import React, { Component } from 'react';
-import { TouchableOpacity, Image, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { Header, Left, Right, Icon, Body, Title, Button } from 'native-base';
 
-import { Block, Card, Text, IconImage, Label } from '../components';
+import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
+import React from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Block, Card, Label, Text } from '../components';
 import * as theme from '../constants/theme';
 
-const styles = StyleSheet.create({
-  overview: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: theme.colors.white,
-  },
-  margin: {
-    marginHorizontal: 25,
-  },
-  driver: {
-    marginBottom: 11,
-  },
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-  },
-  headerText: {
-    flex:4,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-});
-
-class Transaction extends Component {
-
-    static navigationOptions = {
-        drawerIcon : ({tintColor}) => (
-            <Icon name="home" style={{fontSize:24,  color: tintColor}} />
-        )
-      };
-
-  render() {
-    return (
-        <React.Fragment>
-        <Header>
-          <Left style={{ flex: 1 }}>
-             <Button transparent>
-                <Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />
-                  </Button>
-              </Left>
-              <Body style={styles.headerText}>
-                <Title>TRANSACTIONS</Title>
-            </Body>
-            <Right  style={{ flex: 1 }}>
-            </Right>
-          </Header>
+const TransactionScreen = ({ navigation }) => {
+  return (
+    <React.Fragment>
+      <Header>
+        <Left style={{ flex: 1 }}>
+          <Button transparent>
+            <Icon name="menu" onPress={() => navigation.openDrawer()} />
+          </Button>
+        </Left>
+        <Body style={styles.headerText}>
+          <Title>TRANSACTIONS</Title>
+        </Body>
+        <Right style={{ flex: 1 }}></Right>
+      </Header>
       <SafeAreaView style={styles.overview}>
         <ScrollView contentContainerStyle={{ paddingVertical: 25 }}>
             <Card row middle style={styles.margin}>
             <Block flex={1.2} center middle style={{ marginRight: 0 }}>
-              <Text light height={43} size={26} spacing={-0.45}>Anayo Oleru</Text>
+              <Text light height={43} size={26} spacing={-0.45}>Chuck Mbanaso</Text>
               <Text ligth caption center style={{ marginTop: 3 }}>
-                Account Number: 0078675645
+                Account Number: 0078675640
               </Text>
               <Text ligth caption center style={{ marginTop: 3 }}>
-                BVN: 2233456778
+                BVN: 2233456881
               </Text>
             </Block>
           </Card>
@@ -126,7 +93,7 @@ class Transaction extends Component {
               <TouchableOpacity activeOpacity={0.8}>
                 <Block row center>
                   <Block flex={2}>
-                    <Text h4>James Chukwudi</Text>
+                    <Text h4>Chukwudi Joshua</Text>
                     <Text paragraph color="gray">Wema Bank</Text>
                   </Block>
                   <Block>
@@ -140,12 +107,12 @@ class Transaction extends Component {
               <TouchableOpacity activeOpacity={0.8}>
                 <Block row center>
                   <Block flex={2}>
-                    <Text h4>Ebuka Douglas</Text>
+                    <Text h4>Ebuka John</Text>
                     <Text paragraph color="gray">UBA bank</Text>
                   </Block>
                   <Block>
                     <Text paragraph right color="black">$6,432</Text>
-                    <Text paragraph right color="gray">14/10/2019</Text>
+                    <Text paragraph right color="gray">02/16/2024</Text>
                   </Block>
                 </Block>
               </TouchableOpacity>
@@ -154,12 +121,12 @@ class Transaction extends Component {
               <TouchableOpacity activeOpacity={0.8}>
                 <Block row center>
                   <Block flex={2}>
-                    <Text h4>Kafayat Ogidan</Text>
+                    <Text h4>Jane Ufoma</Text>
                     <Text paragraph color="gray">Sterling bank</Text>
                   </Block>
                   <Block>
                     <Text paragraph right color="black">$6,432</Text>
-                    <Text paragraph right color="gray">01/11/2018</Text>
+                    <Text paragraph right color="gray">02/17/2024</Text>
                   </Block>
                 </Block>
               </TouchableOpacity>
@@ -194,9 +161,33 @@ class Transaction extends Component {
           </Card>
         </ScrollView>
       </SafeAreaView>
-      </React.Fragment>
-    )
-  }
-}
+    </React.Fragment>
+  );
+};
 
-export default Transaction;
+
+const styles = StyleSheet.create({
+  overview: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: theme.colors.white,
+  },
+  margin: {
+    marginHorizontal: 25,
+  },
+  driver: {
+    marginBottom: 11,
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+  },
+  headerText: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export default TransactionScreen;

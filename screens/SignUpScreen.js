@@ -1,102 +1,60 @@
-  
-import React, { Component} from 'react';
-import {View, Text, TouchableOpacity, TextInput, ImageBackground, Image, Dimensions, ScrollView, } from 'react-native';
-import { Header, Left, Right, Icon } from 'native-base';
-import { Ionicons, FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import { FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Loader from '../components/Loader';
-import bgImage from '../assets/images/background2.png';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import logo from '../assets/images/sunbank.png';
+import Loader from '../components/Loader';
 
 const { width: WIDTH } = Dimensions.get('window'); 
-class SignUp extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            firstName: '',
-            lastName: '',
-            phoneNumber: '',
-            password: '',
-            showPass: true,
-            press: false,
-            isVisible: false,
-            chosenDate: ''
-        }
-    }
 
-    static navigationOptions = {
-        header: null
-      };
+const SignUp = ({ navigation }) => {
+    const [state, setState] = useState({
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        password: '',
+        showPass: true,
+        press: false,
+        isVisible: false,
+        chosenDate: '',
+        loading: false
+    });
 
-      static get options() {
-        return {
-          topBar: {
-            visible: false,
-            animate: false
-          }
-        };
-      }
+    useEffect(() => {
+        setTimeout(() => {
+            setState(prevState => ({ ...prevState, loading: false }));
+        }, 3000);
+    }, []);
 
-    handleFirstNameInput = (name) => {
-        this.setState({ name });
-    }
+    const handleInputChange = (name, value) => {
+        setState(prevState => ({ ...prevState, [name]: value }));
+    };
 
-    handleLastNameInput = (lastName) => {
-        this.setState({ lastName });
-    }
-
-    handlePhoneInput = (phone) => {
-        this.setState({ phone });
-    }
-
-    handlePasswordInput = (password) => {
-        this.setState({ password });
-    }
-
-    handleDatePicker = (date) => {
-        this.setState({
+    const handleDatePicker = (date) => {
+        setState(prevState => ({
+            ...prevState,
             isVisible: false,
             chosenDate: moment(date).format('MMMM, Do YYYY')
-        })
+        }));
     };
 
-    hideDateTimePicker = () => {
-        this.setState({
-            isVisible: true
-        })
+    const toggleDateTimePicker = (isVisible) => {
+        setState(prevState => ({ ...prevState, isVisible }));
     };
 
-    showPicker = () => {
-        this.setState({
-             isVisible: true
-        })
-    };
-
-    componentDidMount(){
-        setTimeout(() => {
-            this.setState({
-              loading: false
-            });
-          }, 3000);
-    };
-
-    render() {
-
-        const { navigate } = this.props.navigation;
-        return (
-            <ImageBackground style={styles.backgroundContainer}>
-              <Loader loading={this.state.loading} />
-                <KeyboardAwareScrollView>
+    return (
+        <ImageBackground style={styles.backgroundContainer}>
+            <Loader loading={state.loading} />
+            <KeyboardAwareScrollView>
                 <View style={styles.logoContainer}>
                     <Text style={styles.WelcomeText}>Welcome To Your One Customer Bank</Text>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.introText}>Let's set up your account real quick!</Text>
                 </View>
                 <View style={styles.inputContainer}>
-                    <FontAwesome name={'bank'} size={25} color={'white'} 
-                    style={styles.inputIcon} />
+                    <FontAwesome name={'bank'} size={25} color={'white'} style={styles.inputIcon} />
                     <TextInput
                         style={styles.input}
                         placeholder={'Enter your BVN'}
@@ -106,53 +64,47 @@ class SignUp extends React.Component {
                 </View>
                 <Text style={styles.tipText}>Quick Tip: Dial *565*0# on your registered mobile number to get your BVN.</Text>
                 <View style={styles.inputContainer}>
-                    <Ionicons name={'ios-person'} size={25} color={'white'} 
-                    style={styles.inputIcon} />
+                    <Ionicons name={'ios-person'} size={25} color={'white'} style={styles.inputIcon} />
                     <TextInput
                         style={styles.input}
                         placeholder={'First Name'}
                         placeholderTextColor={'white'}
                         underlineColorAndroid='transparent'
+                        onChangeText={(text) => handleInputChange('firstName', text)}
                     />
                 </View>
 
                 <View style={styles.inputContainer}>
-                    <Ionicons name={'ios-person'} size={25} color={'white'} 
-                    style={styles.inputIcon} />
+                    <Ionicons name={'ios-person'} size={25} color={'white'} style={styles.inputIcon} />
                     <TextInput
                         style={styles.input}
                         placeholder={'Last Name'}
                         placeholderTextColor={'white'}
                         underlineColorAndroid='transparent'
+                        onChangeText={(text) => handleInputChange('lastName', text)}
                     />
                 </View>
 
-                <TouchableOpacity style={styles.inputContainer} onPress={this.showPicker}>
-                <MaterialIcons name={'date-range'} size={25} color={'white'} 
-                    style={styles.inputIcon} />
+                <TouchableOpacity style={styles.inputContainer} onPress={() => toggleDateTimePicker(true)}>
+                    <MaterialIcons name={'date-range'} size={25} color={'white'} style={styles.inputIcon} />
                     <Text style={styles.dateText}>Date of birth</Text>
-                    <Text style={styles.dateText}>{this.state.chosenDate}</Text>
+                    <Text style={styles.dateText}>{state.chosenDate}</Text>
                 </TouchableOpacity>
 
-                <View style={styles.inputContainer}>
-                    <DateTimePicker
-                        isVisible={this.state.isVisible}
-                        onConfirm={this.handleDatePicker}
-                        onCancel={this. hideDateTimePicker}
-                        />
-                </View>
-                
+                <DateTimePicker
+                    isVisible={state.isVisible}
+                    onConfirm={handleDatePicker}
+                    onCancel={() => toggleDateTimePicker(false)}
+                />
 
-                <TouchableOpacity style={styles.btnLogin} onPress={() => this.props.navigation.navigate('Main')}>
-                        <Text style={styles.text}>Continue</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.tipText} onPress={() => this.props.navigation.navigate('SignIn')} >Already have an account? Signin</Text>
-                    </KeyboardAwareScrollView>
-            </ImageBackground>
-        )
-    }
-}
-
+                <TouchableOpacity style={styles.btnLogin} onPress={() => navigation.navigate('Main')}>
+                    <Text style={styles.text}>Continue</Text>
+                </TouchableOpacity>
+                <Text style={styles.tipText} onPress={() => navigation.navigate('SignIn')}>Already have an account? Signin</Text>
+            </KeyboardAwareScrollView>
+        </ImageBackground>
+    );
+};
 
 const styles = {
     backgroundContainer: {

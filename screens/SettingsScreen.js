@@ -1,42 +1,34 @@
-import React from 'react';
-import { ExpoConfigView, ExpoLinksView } from '@expo/samples';
-import { ScrollView, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Header, Left, Right, Icon, Text as TabText, Body, Button, Title } from 'native-base';
+import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
+import React from 'react';
+import { ScrollView, StyleSheet } from 'react-native';
 
-
-class SettingsScreen extends React.Component {
-  constructor(props){
-      super(props)
-      this.state = {}
-  };
-
- static navigationOptions = {
-     drawerIcon : ({tintColor}) => (
-         <MaterialCommunityIcons name="settings-outline" style={{fontSize:24,  color: tintColor}} />
-     )
-   };
-render(){
-return (
-  <React.Fragment>
-  <Header>
-  <Left style={{ flex: 1 }}>
-     <Button transparent>
-        <Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />
+const SettingsScreen = ({ navigation }) => {
+  return (
+    <React.Fragment>
+      <Header>
+        <Left style={{ flex: 1 }}>
+          <Button transparent>
+            <Icon name="menu" onPress={() => navigation.openDrawer()} />
           </Button>
-      </Left>
-      <Body style={styles.headerText}>
-        <Title>SETTINGS</Title>
-    </Body>
-    <Right  style={{ flex: 1 }}>
-    </Right>
-  </Header>
- <ScrollView style={styles.container}>
+        </Left>
+        <Body style={styles.headerText}>
+          <Title>SETTINGS</Title>
+        </Body>
+        <Right style={{ flex: 1 }}>
+        </Right>
+      </Header>
+      <ScrollView style={styles.container}>
 
- </ScrollView>
- </React.Fragment>
-);
- }
+      </ScrollView>
+    </React.Fragment>
+  );
+};
+
+SettingsScreen.navigationOptions = {
+  drawerIcon: ({ tintColor }) => (
+    <MaterialCommunityIcons name="settings-outline" style={{ fontSize: 24, color: tintColor }} />
+  ),
 };
 
 const styles = StyleSheet.create({
@@ -46,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   headerText: {
-    flex:4,
+    flex: 4,
     justifyContent: 'center',
     alignItems: 'center',
   }
