@@ -12,10 +12,12 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import logo from "../assets/images/sunbank.png";
 import Loader from "../components/Loader";
+import { useNavigation } from "@react-navigation/native";
 
 const { width: WIDTH } = Dimensions.get("window");
 
-const SignIn = ({ navigation }) => {
+const SignIn = () => {
+  const navigation = useNavigation()
   const [state, setState] = useState({
     firstName: "",
     lastName: "",

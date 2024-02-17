@@ -2,8 +2,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 
-const PayBills = ({ navigation }) => {
+const PayBills = () => {
+  const navigation = useNavigation()
   return (
     <React.Fragment>
       <Header>

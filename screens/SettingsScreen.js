@@ -2,8 +2,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 
-const SettingsScreen = ({ navigation }) => {
+const SettingsScreen = () => {
+  const navigation = useNavigation()
   return (
     <React.Fragment>
       <Header>

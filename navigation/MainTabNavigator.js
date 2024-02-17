@@ -3,11 +3,12 @@ import { Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+import {
+  LinksScreen,
+  HomeScreen,
+  SettingsScreen,
+} from "../screens";
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();

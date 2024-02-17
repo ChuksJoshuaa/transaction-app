@@ -5,9 +5,11 @@ import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { Block, Card, Text } from "../components";
 import * as theme from "../constants/theme";
 import { TransactionData } from "../utils";
+import { useNavigation } from "@react-navigation/native";
 
-const TransactionInformation = ({ navigation }) => {
-
+const TransactionInformation = () => {
+  const navigation = useNavigation()
+  
   return (
     <React.Fragment>
       <Header>

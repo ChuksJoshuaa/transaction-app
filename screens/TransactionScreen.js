@@ -10,8 +10,10 @@ import { Block, Card, Label, Text } from "../components";
 import * as theme from "../constants/theme";
 import { TransactionData } from "../utils";
 import moment from "moment";
+import { useNavigation } from "@react-navigation/native";
 
-const TransactionScreen = ({ navigation }) => {
+const TransactionScreen = () => {
+  const navigation = useNavigation()
   return (
     <React.Fragment>
       <Header>

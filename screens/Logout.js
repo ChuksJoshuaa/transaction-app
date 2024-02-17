@@ -4,16 +4,18 @@ import React from 'react';
 import { Dimensions, Image, ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import logo from '../assets/images/sunbank.png';
+import { useNavigation } from "@react-navigation/native";
 
 const { width: WIDTH } = Dimensions.get('window');
 
 const Logout = (props) => {
+  const navigation = useNavigation()
   return (
     <React.Fragment>
       <Header>
         <Left style={{ flex: 1 }}>
           <Button transparent>
-            <Icon name="menu" onPress={() => props.navigation.openDrawer()} />
+            <Icon name="menu" onPress={() => navigation.openDrawer()} />
           </Button>
         </Left>
         <Body style={styles.headerText}>

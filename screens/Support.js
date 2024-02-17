@@ -2,9 +2,12 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 
-const Support = (props) => {
-  const navigationOptions = {
+const Support = () => {
+  const navigation = useNavigation()
+
+  Support.navigationOptions = {
     drawerIcon: ({ tintColor }) => (
       <FontAwesome name="support" style={{ fontSize: 24, color: tintColor }} />
     ),
@@ -15,7 +18,7 @@ const Support = (props) => {
       <Header>
         <Left style={{ flex: 1 }}>
           <Button transparent>
-            <Icon name="menu" onPress={() => props.navigation.openDrawer()} />
+            <Icon name="menu" onPress={() => navigation.openDrawer()} />
           </Button>
         </Left>
         <Body style={styles.headerText}>

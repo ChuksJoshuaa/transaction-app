@@ -1,10 +1,31 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { SignInStackNavigator, SignUpNavigator, TransactionInfoNavigator  } from "./StackNavigator";
 import { TransactionStackNavigator } from "./DrawerNavigation";
+import { SignIn, SignUp, TransactionInformation } from "../screens";
 
 const Stack = createStackNavigator();
+
+const SignUpNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="SignUp" component={SignUp} />
+  </Stack.Navigator>
+);
+
+const SignInStackNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="SignIn" component={SignIn} />
+  </Stack.Navigator>
+);
+
+const TransactionInfoNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="TransactionInformation"
+      component={TransactionInformation}
+    />
+  </Stack.Navigator>
+);
 
 function AppNavigator() {
   return (
