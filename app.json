@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Prime Bank",
+    "slug": "primebank",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
+    "platforms": ["ios", "android", "web"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/sunbank.png",
+    "splash": {
+      "image": "./assets/images/sunbank.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#062b50"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.primebank.app"
+    }
+  }
+}
