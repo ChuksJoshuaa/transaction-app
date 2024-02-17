@@ -1,17 +1,38 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { SignInStackNavigator, SignUpNavigator, TransactionInfoNavigator  } from "./StackNavigator";
+import { TransactionStackNavigator } from "./DrawerNavigation";
 
-import { TransactionStackNavigator } from './DrawerNavigation';
-import { SignInStackNavigator, SignUpNavigator, TransactionInfo } from './StackNavigator';
+const Stack = createStackNavigator();
 
-export default createAppContainer(
-  createSwitchNavigator({
-    // You could add another route here for authentication.
-    SignUp: SignUpNavigator,
-    SignIn: SignInStackNavigator,
-    Main: TransactionStackNavigator, 
-    TransactionInformation: TransactionInfo 
-  },
-  {
-    initialRouteName: 'SignIn'
-  })
-);
+function AppNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignIn"
+          component={SignInStackNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Main"
+          component={TransactionStackNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TransactionInformation"
+          component={TransactionInfoNavigator}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default AppNavigator;

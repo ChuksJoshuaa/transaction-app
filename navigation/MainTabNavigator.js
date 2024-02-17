@@ -1,79 +1,81 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import React from "react";
+import { Platform } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TabBarIcon from "../components/TabBarIcon";
+import HomeScreen from "../screens/HomeScreen";
+import LinksScreen from "../screens/LinksScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 
-const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
+const Tab = createBottomTabNavigator();
+const HomeStack = createStackNavigator();
+const LinksStack = createStackNavigator();
+const SettingsStack = createStackNavigator();
 
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+    </HomeStack.Navigator>
+  );
+}
 
-export const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-  },
-  config
-);
+function LinksStackScreen() {
+  return (
+    <LinksStack.Navigator>
+      <LinksStack.Screen name="Links" component={LinksScreen} />
+    </LinksStack.Navigator>
+  );
+}
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Transaction',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+    </SettingsStack.Navigator>
+  );
+}
 
-HomeStack.path = '';
+export default function MainTabNavigator() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
-);
+            if (route.name === "Home") {
+              iconName = focused
+                ? "ios-information-circle"
+                : "ios-information-circle-outline";
+            } else if (route.name === "Links") {
+              iconName = "ios-link";
+            } else if (route.name === "Settings") {
+              iconName = "ios-options";
+            }
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
-
-LinksStack.path = '';
-
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-);
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
-
-SettingsStack.path = '';
-
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
-
-tabNavigator.path = '';
-
-export default tabNavigator;
+            // You can return any component that you like here!
+            return (
+              <TabBarIcon
+                name={
+                  Platform.OS === "ios" ? `ios-${iconName}` : `md-${iconName}`
+                }
+                focused={focused}
+              />
+            );
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: "tomato",
+          inactiveTintColor: "gray",
+        }}
+      >
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Links" component={LinksStackScreen} />
+        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}

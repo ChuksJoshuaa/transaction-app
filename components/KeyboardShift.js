@@ -1,11 +1,6 @@
-import PropTypes from 'prop-types';
+import PropTypes from "deprecated-react-native-prop-types";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Animated,
-  Dimensions,
-  Keyboard,
-  findNodeHandle
-} from "react-native";
+import { Animated, Dimensions, Keyboard, findNodeHandle } from "react-native";
 
 const KeyboardShift = ({ children }) => {
   const shift = useRef(new Animated.Value(0)).current;
@@ -69,11 +64,11 @@ const KeyboardShift = ({ children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    height: "100%",
     left: 0,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
-    width: '100%',
+    width: "100%",
   },
 });
 

@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 // import DateTimePicker from "react-native-modal-datetime-picker";
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from "@react-native-community/datetimepicker";
 import logo from "../assets/images/sunbank.png";
 import Loader from "../components/Loader";
 
@@ -130,11 +130,11 @@ const SignUp = ({ navigation }) => {
           <Text style={styles.dateText}>{state.chosenDate}</Text>
         </TouchableOpacity>
 
-        <DateTimePicker
+        {/* <DateTimePicker
           isVisible={state.isVisible}
           onConfirm={handleDatePicker}
           onCancel={() => toggleDateTimePicker(false)}
-        />
+        /> */}
 
         <TouchableOpacity
           style={styles.btnLogin}
