@@ -11,7 +11,7 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		8B160D740C6F43639A060219 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C923C6E38F498A81B5DDFA /* noop-file.swift */; };
+		379AAB6B03444E4C80CC5DAC /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48CEAEDB90943719B1A492E /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,26 +20,26 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = PrimeBank;
+			remoteInfo = SecureTransactionApp;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* PrimeBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimeBank.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PrimeBank/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = PrimeBank/AppDelegate.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* SecureTransactionApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecureTransactionApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SecureTransactionApp/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SecureTransactionApp/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PrimeBank/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PrimeBank/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PrimeBank/main.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SecureTransactionApp/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SecureTransactionApp/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SecureTransactionApp/main.m; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F7C923C6E38F498A81B5DDFA /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "PrimeBank/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		A303145B88744675B9F79E06 /* PrimeBank-Bridging-Header.h */ = {isa = PBXFileReference; name = "PrimeBank-Bridging-Header.h"; path = "PrimeBank/PrimeBank-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		B14EDD72C2654979B7143268 /* SplashScreen.storyboard */ = {isa = PBXFileReference; name = "SplashScreen.storyboard"; path = "PrimeBank/SplashScreen.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C48CEAEDB90943719B1A492E /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "SecureTransactionApp/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		F74D6899E10A488295070C4D /* SecureTransactionApp-Bridging-Header.h */ = {isa = PBXFileReference; name = "SecureTransactionApp-Bridging-Header.h"; path = "SecureTransactionApp/SecureTransactionApp-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		6DD842A2C21349E0B12F1D70 /* SplashScreen.storyboard */ = {isa = PBXFileReference; name = "SplashScreen.storyboard"; path = "SecureTransactionApp/SplashScreen.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* PrimeBank */ = {
+		13B07FAE1A68108700A75B9A /* SecureTransactionApp */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -78,11 +78,11 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				F7C923C6E38F498A81B5DDFA /* noop-file.swift */,
-				A303145B88744675B9F79E06 /* PrimeBank-Bridging-Header.h */,
-				B14EDD72C2654979B7143268 /* SplashScreen.storyboard */,
+				C48CEAEDB90943719B1A492E /* noop-file.swift */,
+				F74D6899E10A488295070C4D /* SecureTransactionApp-Bridging-Header.h */,
+				6DD842A2C21349E0B12F1D70 /* SplashScreen.storyboard */,
 			);
-			name = PrimeBank;
+			name = SecureTransactionApp;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -105,7 +105,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* PrimeBank */,
+				13B07FAE1A68108700A75B9A /* SecureTransactionApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
@@ -118,7 +118,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* PrimeBank.app */,
+				13B07F961A680F5B00A75B9A /* SecureTransactionApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,9 +126,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* PrimeBank */ = {
+		13B07F861A680F5B00A75B9A /* SecureTransactionApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PrimeBank" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SecureTransactionApp" */;
 			buildPhases = (
 				FD4C38642228810C00325AF5 /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -140,9 +140,9 @@
 			);
 			dependencies = (
 			);
-			name = PrimeBank;
+			name = SecureTransactionApp;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* PrimeBank.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* SecureTransactionApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -160,7 +160,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PrimeBank" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SecureTransactionApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -173,7 +173,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* PrimeBank */,
+				13B07F861A680F5B00A75B9A /* SecureTransactionApp */,
 			);
 		};
 /* End PBXProject section */
@@ -192,8 +192,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				C07AE24D498344BFBF29D518 /* PrimeBank-Bridging-Header.h in Resources */,
-				51BE9B0875E04B62AC074C25 /* SplashScreen.storyboard in Resources */,
+				8B5527FA3F8845639D84CF66 /* SecureTransactionApp-Bridging-Header.h in Resources */,
+				ECAC746B468748C38EA3C034 /* SplashScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +249,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				8B160D740C6F43639A060219 /* noop-file.swift in Sources */,
+				379AAB6B03444E4C80CC5DAC /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +258,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* PrimeBank */;
+			target = 13B07F861A680F5B00A75B9A /* SecureTransactionApp */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -270,7 +270,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = PrimeBank;
+			path = SecureTransactionApp;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -284,7 +284,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = PrimeBankTests/Info.plist;
+				INFOPLIST_FILE = SecureTransactionAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -294,9 +294,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrimeBank.app/PrimeBank";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecureTransactionApp.app/SecureTransactionApp";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				SWIFT_OBJC_BRIDGING_HEADER = PrimeBank/PrimeBank-Bridging-Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = SecureTransactionApp/SecureTransactionApp-Bridging-Header.h;
 			};
 			name = Debug;
 		};
@@ -305,7 +305,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = PrimeBankTests/Info.plist;
+				INFOPLIST_FILE = SecureTransactionAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -315,9 +315,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrimeBank.app/PrimeBank";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SecureTransactionApp.app/SecureTransactionApp";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				SWIFT_OBJC_BRIDGING_HEADER = PrimeBank/PrimeBank-Bridging-Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = SecureTransactionApp/SecureTransactionApp-Bridging-Header.h;
 			};
 			name = Release;
 		};
@@ -327,19 +327,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				INFOPLIST_FILE = PrimeBank/Info.plist;
+				INFOPLIST_FILE = SecureTransactionApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.primebank.app";
-				PRODUCT_NAME = "PrimeBank";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.securetransaction.app";
+				PRODUCT_NAME = "SecureTransactionApp";
 				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				SWIFT_OBJC_BRIDGING_HEADER = PrimeBank/PrimeBank-Bridging-Header.h;
-				CODE_SIGN_ENTITLEMENTS = PrimeBank/"Hello World".entitlements;
+				SWIFT_OBJC_BRIDGING_HEADER = SecureTransactionApp/SecureTransactionApp-Bridging-Header.h;
+				CODE_SIGN_ENTITLEMENTS = SecureTransactionApp/"Hello World".entitlements;
 			};
 			name = Debug;
 		};
@@ -348,19 +348,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = PrimeBank/Info.plist;
+				INFOPLIST_FILE = SecureTransactionApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.primebank.app";
-				PRODUCT_NAME = "PrimeBank";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.securetransaction.app";
+				PRODUCT_NAME = "SecureTransactionApp";
 				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				SWIFT_OBJC_BRIDGING_HEADER = PrimeBank/PrimeBank-Bridging-Header.h;
-				CODE_SIGN_ENTITLEMENTS = PrimeBank/"Hello World".entitlements;
+				SWIFT_OBJC_BRIDGING_HEADER = SecureTransactionApp/SecureTransactionApp-Bridging-Header.h;
+				CODE_SIGN_ENTITLEMENTS = SecureTransactionApp/"Hello World".entitlements;
 			};
 			name = Release;
 		};
@@ -466,7 +466,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PrimeBankTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SecureTransactionAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -475,7 +475,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PrimeBank" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SecureTransactionApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -484,7 +484,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "PrimeBank" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "SecureTransactionApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

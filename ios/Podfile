@@ -2,8 +2,8 @@ platform :ios, '10.0'
 
 require_relative '../node_modules/react-native-unimodules/cocoapods'
 
-target 'PrimeBank' do
-  # Pods for PrimeBank
+target 'SecureTransactionApp' do
+  # Pods for SecureTransactionApp
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     'CxxBridge',

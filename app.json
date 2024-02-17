@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Prime Bank",
-    "slug": "primebank",
+    "name": "Secure Transaction App",
+    "slug": "transaction",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/sunbank.png",
+    "icon": "./assets/images/gradell.jpeg",
     "splash": {
-      "image": "./assets/images/sunbank.png",
+      "image": "./assets/images/gradell.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#062b50"
     },
@@ -19,7 +19,15 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.primebank.app"
+      "bundleIdentifier": "com.securetransaction.app"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0b876dcb-f794-4fdd-8e04-5f325d89e3d3"
+      }
+    },
+    "android": {
+      "package": "com.securetransaction.app"
     }
   }
 }
