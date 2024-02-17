@@ -1,4 +1,4 @@
-import { Body, Button, Header, Icon, Left, Right, Title } from "native-base";
+import moment from "moment";
 import React from "react";
 import {
   SafeAreaView,
@@ -7,26 +7,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Block, Card, Label, Text } from "../components";
+import { HeaderContainer } from "../components/Header";
 import * as theme from "../constants/theme";
 import { TransactionData } from "../utils";
-import moment from "moment";
-import { useNavigation } from "@react-navigation/native";
 
 const TransactionScreen = () => {
-  const navigation = useNavigation()
   return (
     <React.Fragment>
-      <Header>
-        <Left style={{ flex: 1 }}>
-          <Button transparent>
-            <Icon name="menu" onPress={() => navigation.openDrawer()} />
-          </Button>
-        </Left>
-        <Body style={styles.headerText}>
-          <Title>TRANSACTIONS</Title>
-        </Body>
-        <Right style={{ flex: 1 }}></Right>
-      </Header>
+      <HeaderContainer text={"TRANSACTIONS"} />
       <SafeAreaView style={styles.overview}>
         <ScrollView contentContainerStyle={{ paddingVertical: 25 }}>
           <Card row middle style={styles.margin}>
@@ -178,6 +166,7 @@ const TransactionScreen = () => {
 };
 
 const styles = StyleSheet.create({
+
   overview: {
     flex: 1,
     flexDirection: "column",

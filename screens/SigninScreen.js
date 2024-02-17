@@ -10,14 +10,13 @@ import {
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import logo from "../assets/images/sunbank.png";
 import Loader from "../components/Loader";
 import { useNavigation } from "@react-navigation/native";
 
 const { width: WIDTH } = Dimensions.get("window");
 
 const SignIn = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -43,8 +42,7 @@ const SignIn = () => {
       <ImageBackground style={styles.backgroundContainer}>
         <Loader loading={state.loading} />
         <KeyboardAwareScrollView>
-          <View style={styles.logoContainer}>
-            <Image source={logo} style={styles.logo} />
+          <View style={[styles.logoContainer, { marginTop: 90 }]}>
             <Text style={styles.logoText}>Login with your credentials</Text>
           </View>
           <View style={styles.inputContainer}>
@@ -129,6 +127,7 @@ const styles = {
     marginTop: 10,
     padding: 10,
     textDecorationLine: "underline",
+    marginHorizontal: 25,
   },
   input: {
     width: WIDTH - 55,
@@ -160,6 +159,7 @@ const styles = {
     backgroundColor: "#fcbb16",
     justifyContent: "center",
     marginTop: 20,
+    marginHorizontal: 25,
   },
   text: {
     color: "white",

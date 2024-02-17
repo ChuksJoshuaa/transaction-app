@@ -1,25 +1,22 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import React from "react";
+import { ScrollView, StyleSheet, View, Text } from "react-native";
 
 const LinksScreen = () => {
   return (
     <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      {/* <ExpoLinksView /> */}
+      <View>
+        <Text>This is a link page.</Text>
+      </View>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });
 
-export default LinksScreen
+export default LinksScreen;

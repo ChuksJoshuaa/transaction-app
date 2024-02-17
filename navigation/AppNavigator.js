@@ -1,44 +1,31 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { TransactionStackNavigator } from "./DrawerNavigation";
+import TransactionStackNavigator from "./DrawerNavigation";
 import { SignIn, SignUp, TransactionInformation } from "../screens";
 
 const Stack = createStackNavigator();
 
-const SignUpNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen name="SignUp" component={SignUp} />
-  </Stack.Navigator>
-);
-
-const SignInStackNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen name="SignIn" component={SignIn} />
-  </Stack.Navigator>
-);
-
-const TransactionInfoNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="TransactionInformation"
-      component={TransactionInformation}
-    />
-  </Stack.Navigator>
-);
+const AppTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "rgb(255, 45, 85)",
+  },
+};
 
 function AppNavigator() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={AppTheme}>
       <Stack.Navigator initialRouteName="SignIn">
         <Stack.Screen
           name="SignUp"
-          component={SignUpNavigator}
+          component={SignUp}
           options={{ headerShown: false }}
         />
         <Stack.Screen
           name="SignIn"
-          component={SignInStackNavigator}
+          component={SignIn}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -48,7 +35,7 @@ function AppNavigator() {
         />
         <Stack.Screen
           name="TransactionInformation"
-          component={TransactionInfoNavigator}
+          component={TransactionInformation}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

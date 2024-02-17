@@ -3,27 +3,27 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons/";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { useNavigation } from "@react-navigation/native";
 import moment from "moment";
-import { Body, Button, Header, Icon, Left, Right, Title } from "native-base";
 import React, { useEffect, useState } from "react";
 import {
   Dimensions,
   Image,
   ImageBackground,
+  Platform,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import DateTimePicker from "react-native-modal-datetime-picker";
-import logo from "../assets/images/sunbank.png";
+import { HeaderContainer } from "../components/Header";
 import Loader from "../components/Loader";
-import { useNavigation } from "@react-navigation/native";
 const { width: WIDTH } = Dimensions.get("window");
 
 const Transfer = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -69,40 +69,34 @@ const Transfer = () => {
     }));
   };
 
-  const hideDateTimePicker = () => {
-    setState((prevState) => ({
-      ...prevState,
-      isVisible: false,
-    }));
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+    // Format the date and update the state as needed
+    handleDatePicker(currentDate);
   };
 
-  const showPicker = () => {
-    setState((prevState) => ({
-      ...prevState,
-      isVisible: true,
-    }));
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
   };
 
   return (
     <React.Fragment>
-      <View>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon name="menu" onPress={() => navigation.openDrawer()} />
-            </Button>
-          </Left>
-          <Body style={styles.headerText}>
-            <Title>TRANSFER</Title>
-          </Body>
-          <Right style={{ flex: 1 }}></Right>
-        </Header>
-      </View>
+      <HeaderContainer text={"TRANSFER"} />
       <ImageBackground style={styles.backgroundContainer}>
         <Loader loading={state.loading} />
         <KeyboardAwareScrollView>
-          <View style={styles.logoContainer}>
-            <Image source={logo} style={styles.logo} />
+          <View style={[styles.logoContainer, {marginTop: 50}]}>
           </View>
           <Text ligth caption center style={styles.tranText}>
             Transfer from:
@@ -161,7 +155,10 @@ const Transfer = () => {
           <Text ligth caption center style={styles.tranText}>
             Transfer Date:
           </Text>
-          <TouchableOpacity style={styles.inputContainer} onPress={showPicker}>
+          <TouchableOpacity
+            style={styles.inputContainer}
+            onPress={showDatepicker}
+          >
             <MaterialIcons
               name={"date-range"}
               size={25}
@@ -173,13 +170,16 @@ const Transfer = () => {
           </TouchableOpacity>
 
           <View style={styles.inputContainer}>
-            <DateTimePicker
-              isVisible={state.isVisible}
-              onConfirm={handleDatePicker}
-              onCancel={hideDateTimePicker}
-              mode={"datetime"}
-              is24Hours={false}
-            />
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+              />
+            )}
           </View>
 
           <TouchableOpacity style={styles.btnLogin}>
@@ -247,7 +247,6 @@ const styles = {
     paddingLeft: 70,
     backgroundColor: "rgba(0, 0, 0, 0.35)",
     color: "white",
-    marginHoriontal: 25,
   },
   inputIcon: {
     position: "absolute",

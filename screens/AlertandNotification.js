@@ -1,24 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Body, Button, Header, Icon, Left, Right, Title } from "native-base";
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { HeaderContainer } from "../components/Header";
 
 const AlertNotification = () => {
-  const navigation = useNavigation();
   return (
     <React.Fragment>
-      <Header>
-        <Left style={{ flex: 1 }}>
-          <Button transparent>
-            <Icon name="menu" onPress={() => navigation.openDrawer()} />
-          </Button>
-        </Left>
-        <Body style={styles.headerText}>
-          <Title>NOTIFICATION</Title>
-        </Body>
-        <Right style={{ flex: 1 }}></Right>
-      </Header>
+      <HeaderContainer text={"NOTIFICATION"} />
       <ScrollView style={styles.container}></ScrollView>
     </React.Fragment>
   );

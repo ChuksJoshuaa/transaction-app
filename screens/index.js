@@ -10,6 +10,7 @@ import Transaction from "./TransactionScreen";
 import Transfer from "./TransferScreen";
 import SignUp from './SignUpScreen';
 import SignIn from './SigninScreen';
+import LinksScreen from "./LinksScreen";
 
 export {
     ATMlocator,
@@ -23,5 +24,6 @@ export {
     SettingsScreen,
     SignIn,
     SignUp,
-    HomeScreen
+    HomeScreen,
+    LinksScreen
 };

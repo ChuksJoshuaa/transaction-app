@@ -1,31 +1,15 @@
 import moment from "moment";
-import { Body, Button, Header, Icon, Left, Right, Title } from "native-base";
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { Block, Card, Text } from "../components";
+import { HeaderContainer } from "../components/Header";
 import * as theme from "../constants/theme";
 import { TransactionData } from "../utils";
-import { useNavigation } from "@react-navigation/native";
 
 const TransactionInformation = () => {
-  const navigation = useNavigation()
-  
   return (
     <React.Fragment>
-      <Header>
-        <Left style={{ flex: 1 }}>
-          <Button transparent>
-            <Icon
-              name="menu"
-              onPress={() => navigation.openDrawer()}
-            />
-          </Button>
-        </Left>
-        <Body style={styles.headerText}>
-          <Title>TRANSACTION INFORMATION</Title>
-        </Body>
-        <Right style={{ flex: 1 }}></Right>
-      </Header>
+      <HeaderContainer text={"TRANSACTION INFORMATION"} />
       <SafeAreaView style={styles.overview}>
         <ScrollView contentContainerStyle={{ paddingVertical: 25 }}>
           <Card
@@ -46,8 +30,7 @@ const TransactionInformation = () => {
                       {item.amount}
                     </Text>
                     <Text paragraph right color="gray">
-                      {moment(item.timestamp).format("MMM DD")} -{" "}
-                      {moment(item.timestamp).format("LTS")}
+                      {moment(item.timestamp).format("MMM DD YYYY")}
                     </Text>
                   </Block>
                 </Block>

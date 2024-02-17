@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import logo from "../assets/images/sunbank.png";
 import Loader from "../components/Loader";
 import { useNavigation } from "@react-navigation/native";
 const { width: WIDTH } = Dimensions.get("window");
@@ -75,11 +74,10 @@ const SignUp = () => {
     <ImageBackground style={styles.backgroundContainer}>
       <Loader loading={state.loading} />
       <KeyboardAwareScrollView>
-        <View style={styles.logoContainer}>
+        <View style={[styles.logoContainer, {marginTop: 50}]}>
           <Text style={styles.WelcomeText}>
             Welcome To Your One Customer Bank
           </Text>
-          <Image source={logo} style={styles.logo} />
           <Text style={styles.introText}>
             Let's set up your account real quick!
           </Text>

@@ -1,1 +1,1 @@
-export const __DEV__ = 'development'
+export const __DEV__ = "production";
