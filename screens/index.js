@@ -8,8 +8,8 @@ import Support from "./Support";
 import TransactionInformation from "./TransactionInformation";
 import Transaction from "./TransactionScreen";
 import Transfer from "./TransferScreen";
-import SignUp from './SupportSignUpScreen';
-import SignIn from './SupportSigninScreen';
+import SignUp from './SignUpScreen';
+import SignIn from './SigninScreen';
 
 export {
     ATMlocator,

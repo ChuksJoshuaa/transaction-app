@@ -5,13 +5,13 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  Platform,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-// import DateTimePicker from "react-native-modal-datetime-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import logo from "../assets/images/sunbank.png";
 import Loader from "../components/Loader";
@@ -19,7 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 const { width: WIDTH } = Dimensions.get("window");
 
 const SignUp = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
@@ -50,8 +50,25 @@ const SignUp = () => {
     }));
   };
 
-  const toggleDateTimePicker = (isVisible) => {
-    setState((prevState) => ({ ...prevState, isVisible }));
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+    // Format the date and update the state as needed
+    handleDatePicker(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
   };
 
   return (
@@ -119,7 +136,7 @@ const SignUp = () => {
 
         <TouchableOpacity
           style={styles.inputContainer}
-          onPress={() => toggleDateTimePicker(true)}
+          onPress={showDatepicker}
         >
           <MaterialIcons
             name={"date-range"}
@@ -131,12 +148,16 @@ const SignUp = () => {
           <Text style={styles.dateText}>{state.chosenDate}</Text>
         </TouchableOpacity>
 
-        {/* <DateTimePicker
-          isVisible={state.isVisible}
-          onConfirm={handleDatePicker}
-          onCancel={() => toggleDateTimePicker(false)}
-        /> */}
-
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            display="default"
+            onChange={onChange}
+          />
+        )}
         <TouchableOpacity
           style={styles.btnLogin}
           onPress={() => navigation.navigate("Main")}
@@ -206,7 +227,7 @@ const styles = {
     paddingLeft: 70,
     backgroundColor: "rgba(0, 0, 0, 0.35)",
     color: "white",
-    marginHoriontal: 25,
+    // marginHoriontal: 25,
   },
   dateText: {
     color: "white",
