@@ -1,7 +1,7 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Body, Button, Header, Icon, Left, Right, Title } from 'native-base';
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { Ionicons } from "@expo/vector-icons";
+import { Body, Button, Header, Icon, Left, Right, Title } from "native-base";
+import React from "react";
+import { ScrollView, StyleSheet } from "react-native";
 
 const AlertNotification = (props) => {
   return (
@@ -15,33 +15,30 @@ const AlertNotification = (props) => {
         <Body style={styles.headerText}>
           <Title>NOTIFICATION</Title>
         </Body>
-        <Right style={{ flex: 1 }}>
-        </Right>
+        <Right style={{ flex: 1 }}></Right>
       </Header>
-      <ScrollView style={styles.container}>
-
-      </ScrollView>
+      <ScrollView style={styles.container}></ScrollView>
     </React.Fragment>
   );
 };
 
 AlertNotification.navigationOptions = {
   drawerIcon: ({ tintColor }) => (
-    <Ionicons name="ios-notifications" style={{ fontSize: 24, color: tintColor }} />
-  )
+    <Ionicons name="notifications" style={{ fontSize: 24, color: tintColor }} />
+  ),
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   headerText: {
     flex: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 export default AlertNotification;

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // Expo imports
@@ -31,11 +30,9 @@ const App = () => {
   if (!fontsLoaded) return null;
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaProvider>
+      <SafeAreaProvider style={{ flex: 1 }}>
         <AppNavigator />
       </SafeAreaProvider>
-    </GestureHandlerRootView>
   );
 };
 
