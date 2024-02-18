@@ -31,7 +31,7 @@ const SignIn = () => {
     setTimeout(() => {
       setState((prevState) => ({ ...prevState, loading: false }));
     }, 3000);
-  }, []);
+  }, [state.loading]);
 
   const handleReset = () => {
     setState({
@@ -39,7 +39,7 @@ const SignIn = () => {
       password: "",
       showPass: true,
       press: false,
-      loading: true,
+      loading: false,
       emailError: "",
       passwordError: "",
     })
@@ -98,6 +98,10 @@ const SignIn = () => {
 
     if (isEmailValid && isPasswordValid) {
       navigation.navigate("Main");
+    }
+
+    else {
+      alert('Please fill all required fields')
     }
 
     handleReset()

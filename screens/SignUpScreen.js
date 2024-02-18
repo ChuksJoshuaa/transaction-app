@@ -3,7 +3,6 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
   Dimensions,
-  Image,
   ImageBackground,
   Platform,
   Text,
@@ -39,7 +38,7 @@ const SignUp = () => {
     setTimeout(() => {
       setState((prevState) => ({ ...prevState, loading: false }));
     }, 3000);
-  }, []);
+  }, [state.loading]);
 
   const handleDatePicker = (date) => {
     setState((prevState) => ({
@@ -150,6 +149,10 @@ const SignUp = () => {
 
     if (isBvnValid && isFirstNameValid && isLastNameValid) {
       navigation.navigate("Main");
+    }
+
+    else {
+      alert('Please fill all required fields')
     }
 
     handleReset();

@@ -9,7 +9,6 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
   Dimensions,
-  Image,
   ImageBackground,
   Platform,
   Text,
@@ -25,15 +24,17 @@ const { width: WIDTH } = Dimensions.get("window");
 const Transfer = () => {
   const navigation = useNavigation();
   const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    password: "",
+    accountFrom: "",
+    accountTo: "",
+    transferAmount: "",
     showPass: true,
     press: false,
     isVisible: false,
     chosenDate: "",
     loading: true,
+    accountFromError: "",
+    accountToError: "",
+    transferAmountError: "",
   });
 
   useEffect(() => {
@@ -43,23 +44,8 @@ const Transfer = () => {
         loading: false,
       }));
     }, 3000);
-  }, []);
+  }, [state.loading]);
 
-  const handleFirstNameInput = (name) => {
-    setState((prevState) => ({ ...prevState, name }));
-  };
-
-  const handleLastNameInput = (lastName) => {
-    setState((prevState) => ({ ...prevState, lastName }));
-  };
-
-  const handlePhoneInput = (phone) => {
-    setState((prevState) => ({ ...prevState, phone }));
-  };
-
-  const handlePasswordInput = (password) => {
-    setState((prevState) => ({ ...prevState, password }));
-  };
 
   const handleDatePicker = (datetime) => {
     setState((prevState) => ({
@@ -77,7 +63,6 @@ const Transfer = () => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
-    // Format the date and update the state as needed
     handleDatePicker(currentDate);
   };
 
@@ -90,14 +75,88 @@ const Transfer = () => {
     showMode("date");
   };
 
+  const handleReset = () => {
+    setState({
+      accountFrom: "",
+      accountTo: "",
+      transferAmount: "",
+      showPass: true,
+      press: false,
+      isVisible: false,
+      chosenDate: "",
+      loading: false,
+      accountFromError: "",
+      accountToError: "",
+      transferAmountError: "",
+    });
+  };
+
+  const setError = (fieldName, errorMessage) => {
+    setState((prevState) => ({
+      ...prevState,
+      [`${fieldName}Error`]: errorMessage,
+    }));
+  };
+
+  const validateAccount = (account, fieldName) => {
+    if (!account) {
+      setError(fieldName, "This field is required");
+      return false;
+    }
+    
+    const accountPattern = /^[a-z0-9]+$/i;
+    if (!accountPattern.test(account)) {
+      setError(fieldName, "Invalid account format");
+      return false;
+    }
+    setError(fieldName, ""); 
+    return true;
+  };
+
+  const validateTransferAmount = (amount) => {
+    if (!amount) {
+      setError("transferAmount", "Amount is required");
+      return false;
+    }
+    const amountNumber = parseFloat(amount);
+    if (isNaN(amountNumber) || amountNumber <= 0) {
+      setError("transferAmount", "Invalid amount");
+      return false;
+    }
+    setError("transferAmount", ""); 
+    return true;
+  };
+
+  const handleInputChange = (name, value) => {
+    setState((prevState) => ({ ...prevState, [name]: value }));
+    if (name === "accountFrom" || name === "accountTo") {
+      validateAccount(value, name);
+    } else if (name === "transferAmount") {
+      validateTransferAmount(value);
+    }
+  };
+
+  const handleSubmit = () => {
+    const isAccountFromValid = validateAccount(state.accountFrom);
+    const isAccountToValid = validateAccount(state.accountTo);
+    const isTransferAmountValid = validateTransferAmount(state.firstName);
+
+    if (isAccountFromValid && isAccountToValid && isTransferAmountValid) {
+      navigation.navigate("Main");
+    }
+    else {
+      alert('Please fill all required fields')
+    }
+    handleReset();
+  };
+
   return (
     <React.Fragment>
       <HeaderContainer text={"TRANSFER"} />
       <ImageBackground style={styles.backgroundContainer}>
         <Loader loading={state.loading} />
         <KeyboardAwareScrollView>
-          <View style={[styles.logoContainer, {marginTop: 50}]}>
-          </View>
+          <View style={[styles.logoContainer, { marginTop: 50 }]}></View>
           <Text ligth caption center style={styles.tranText}>
             Transfer from:
           </Text>
@@ -111,10 +170,15 @@ const Transfer = () => {
             {/* <ion-icon name="person"></ion-icon> */}
             <TextInput
               style={styles.input}
+              value={state.accountFrom}
               placeholder={"Add Account"}
               placeholderTextColor={"white"}
               underlineColorAndroid="transparent"
+              onChangeText={(text) => handleInputChange("accountFrom", text)}
             />
+            {state.accountFromError ? (
+              <Text style={styles.errorText}>{state.accountFromError}</Text>
+            ) : null}
           </View>
           <Text ligth caption center style={styles.tranText}>
             Transfer to:
@@ -128,10 +192,15 @@ const Transfer = () => {
             />
             <TextInput
               style={styles.input}
+              value={state.accountTo}
               placeholder={"Add Account"}
               placeholderTextColor={"white"}
               underlineColorAndroid="transparent"
+              onChangeText={(text) => handleInputChange("accountTo", text)}
             />
+            {state.accountToError ? (
+              <Text style={styles.errorText}>{state.accountToError}</Text>
+            ) : null}
           </View>
 
           <Text ligth caption center style={styles.tranText}>
@@ -146,10 +215,15 @@ const Transfer = () => {
             />
             <TextInput
               style={styles.input}
+              value={state.transferAmount}
               placeholder={"Transfer Amount"}
               placeholderTextColor={"white"}
               underlineColorAndroid="transparent"
+              onChangeText={(text) => handleInputChange("transferAmount", text)}
             />
+            {state.transferAmountError ? (
+              <Text style={styles.errorText}>{state.transferAmountError}</Text>
+            ) : null}
           </View>
 
           <Text ligth caption center style={styles.tranText}>
@@ -182,13 +256,8 @@ const Transfer = () => {
             )}
           </View>
 
-          <TouchableOpacity style={styles.btnLogin}>
-            <Text
-              style={styles.text}
-              onPress={() => navigation.navigate("Main")}
-            >
-              TRANSFER
-            </Text>
+          <TouchableOpacity style={styles.btnLogin} onPress={handleSubmit}>
+            <Text style={styles.text}>TRANSFER</Text>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
       </ImageBackground>
@@ -208,6 +277,13 @@ const styles = {
   logoContainer: {
     alignItems: "center",
     marginBottom: 10,
+  },
+  errorText: {
+    color: "#fff",
+    fontSize: 14,
+    paddingHorizontal: 25,
+    paddingTop: 5,
+    textAlign: "left",
   },
   logo: {
     width: 120,
