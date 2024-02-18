@@ -1,69 +1,56 @@
-// React and React Native imports
-import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-
+import React, { useCallback, useEffect } from "react";
+import { LogBox } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 // Expo imports
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 // Navigation imports
-import AppNavigator from './navigation/AppNavigator';
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import AppNavigator from "./navigation/DrawerNavigation";
 
 // App component
-const App = (props) => {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
-
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
-    );
-  }
-}
-
-// Resource loading
-const loadResourcesAsync = async () => {
-  await Promise.all([
-    Asset.loadAsync([
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
-    ]),
-    Font.loadAsync({
-      ...Ionicons.font,
-      'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-    }),
+const App = () => {
+  LogBox.ignoreLogs([
+    "Sending `onAnimatedValueUpdate` with no listeners registered",
+    "ViewPropTypes will be removed from React Native, along with all other PropTypes."
   ]);
-};
 
-// Error handling
-const handleLoadingError = (error) => {
-  console.warn(error);
-};
+  const [fontsLoaded] = useFonts({
+    ...Ionicons.font,
+    "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+    ionicon: require("./assets/fonts/Ionicons.ttf"),
+  });
 
-// Finish loading
-const handleFinishLoading = (setLoadingComplete) => {
-  setLoadingComplete(true);
-};
 
-// Styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+const AppTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "rgb(255, 45, 85)",
   },
-});
+};
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
-export default App
+  useEffect(() => {
+    onLayoutRootView();
+  }, [onLayoutRootView]);
+
+  if (!fontsLoaded) return null;
+
+  return (
+    <SafeAreaProvider style={{ flex: 1 }}>
+      <NavigationContainer theme={AppTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+};
+
+export default App;

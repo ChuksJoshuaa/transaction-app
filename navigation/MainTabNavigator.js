@@ -1,81 +1,37 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
+import TabBarIcon from "../components/TabBarIcon";
+import { SettingsScreen, TransactionInformation, Transfer } from "../screens";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-import SignIn from '../screens/SigninScreen';
-import SignUp from '../screens/SignUpScreen';
+const Tab = createBottomTabNavigator();
 
-const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
+export default function MainTabNavigator() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: false,
 
-
-export const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-  },
-  config
-);
-
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Transaction',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
-
-HomeStack.path = '';
-
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
-);
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
-
-LinksStack.path = '';
-
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-);
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
-
-SettingsStack.path = '';
-
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
-
-tabNavigator.path = '';
-
-export default tabNavigator;
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === "TRANSACTIONS") {
+            iconName = focused
+              ? "information-circle"
+              : "information-circle-outline";
+          } else if (route.name === "TRANSFER") {
+            iconName = "link";
+          } else if (route.name === "SETTINGS") {
+            iconName = "options";
+          }
+          return <TabBarIcon name={iconName} focused={focused} />;
+        },
+        tabBarActiveTintColor: "#008CFE",
+        tabBarInactiveTintColor: "#828282",
+      })}
+      initialRouteName="TRANSACTIONS"
+    >
+      <Tab.Screen name="TRANSACTIONS" component={TransactionInformation} />
+      <Tab.Screen name="TRANSFER" component={Transfer} />
+      <Tab.Screen name="SETTINGS" component={SettingsScreen} />
+    </Tab.Navigator>
+  );
+}

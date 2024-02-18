@@ -71,3 +71,7 @@ buck-out/
 *.jsbundle
 
 # @end expo-cli
+# Expo
+.expo
+dist/
+web-build/

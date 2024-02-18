@@ -1,22 +1,36 @@
-# PrimeBankApp
+# Transaction App
 
-##### A sample bank app built with React-Native
+##### A secure transaction app built with React-Native
 
-### Open on an Android or IOS device with this expo link:
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img width="380" height="500px" align="center" style="margin-right: 1em" src="https://res.cloudinary.com/chuksmbanaso/image/upload/v1708252570/Simulator_Screen_Shot_-_iPhone_14_Pro_Max_-_2024-02-18_at_11.24.42_hu0rjr.png" alt="drawer" >
+    <img width="380" height="500px" align="center" src="https://res.cloudinary.com/chuksmbanaso/image/upload/v1708252579/Simulator_Screen_Shot_-_iPhone_14_Pro_Max_-_2024-02-18_at_11.24.46_atydcw.png" alt="transfer" >
+</div>
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img width="380" height="500px" style="margin-right: 1em" align="center" src="https://res.cloudinary.com/chuksmbanaso/image/upload/v1708252558/Simulator_Screen_Shot_-_iPhone_14_Pro_Max_-_2024-02-18_at_11.24.30_nn8x4s.png" alt="transaction information" >
+    <img width="380" height="500px" align="center" src="https://res.cloudinary.com/chuksmbanaso/image/upload/v1708252518/Simulator_Screen_Shot_-_iPhone_14_Pro_Max_-_2024-02-18_at_10.12.24_kogxnk.png" alt="sign up" >
+</div>
 
-https://expo.io/@anayooleru/
+## Prerequisites
 
-![Image of PrimeBankApp](https://res.cloudinary.com/dvfr0z8wr/image/upload/v1575145817/Screenshot_2019-11-30_at_4.02.17_PM.png)![Image of PrimeBankApp](https://res.cloudinary.com/dvfr0z8wr/image/upload/v1575146176/Screenshot_2019-11-30_at_4.05.06_PM.png)
+- Node.js (version 16.20.0)
+- npm (version 8.19.4)
 
-![Image of PrimeBankApp](https://res.cloudinary.com/dvfr0z8wr/image/upload/v1575145872/Screenshot_2019-11-30_at_4.04.16_PM.png)![Image of PrimeBankApp](https://res.cloudinary.com/dvfr0z8wr/image/upload/v1575145817/Screenshot_2019-11-30_at_4.03.45_PM.png)
+## Technologies Used
 
-:arrow_forward:
+- React Native
+- Expo ClI
+- JavaScript
 
-## How To Run This App
+## Installation
 
-1. Clone the Repository
-2. Cd into it
-3. npm install
+1. Clone the repository: `git clone git@github.com:ChuksJoshuaa/transaction-app.git`
+2. Navigate to the project directory: `cd transaction-app`
+3. Install dependencies: `npm install`
+
+## Configuration
+
+1. You don't need any configuration to run the project
 
 ## For IOS
 
@@ -25,3 +39,14 @@ https://expo.io/@anayooleru/
 ## For Android
 
 - run expo start --android
+
+
+## Contributing
+
+Contributions are welcome! If you would like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/your-feature-name`.
+3. Make your changes and commit them: `git commit -m 'Add some feature'`.
+4. Push to the branch: `git push origin feature/your-feature-name`.
+5. Submit a pull request.
