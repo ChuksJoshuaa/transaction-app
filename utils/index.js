@@ -44,3 +44,7 @@ export const getPlatform = () => (Platform.OS === "android" ? 50 : 50);
 export const getBottomPlatform = (android, ios) =>
   Platform.OS === "android" ? android : ios;
 export const getAndroidPlatform = () => (Platform.OS === "android" ? 0 : 50);
+export const validateEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email)
+}

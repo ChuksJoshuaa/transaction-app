@@ -1,6 +1,6 @@
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   ImageBackground,
@@ -11,11 +11,25 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { HeaderContainer } from "../components/Header";
+import { validateEmail } from "../utils";
 
 const { width: WIDTH } = Dimensions.get("window");
 
 const Logout = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+
+  const handleLogout = () => {
+    if (!email.trim()) {
+      alert("Please enter an email address.");
+      return;
+    }
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    navigation.navigate("SignIn");
+  };
   return (
     <React.Fragment>
       <HeaderContainer text={"LOGOUT"} />
@@ -33,19 +47,16 @@ const Logout = () => {
             />
             <TextInput
               style={styles.input}
+              value={email}
+              onChangeText={(text) => setEmail(text)}
               placeholder={"Email"}
               placeholderTextColor={"white"}
               underlineColorAndroid="transparent"
             />
           </View>
 
-          <TouchableOpacity style={styles.btnLogin}>
-            <Text
-              style={styles.text}
-              onPress={() => navigation.navigate("SignIn")}
-            >
-              Logout
-            </Text>
+          <TouchableOpacity style={styles.btnLogin} onPress={handleLogout}>
+            <Text style={styles.text}>Logout</Text>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
       </ImageBackground>

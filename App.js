@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
+import {LogBox} from "react-native"
 // Expo imports
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
@@ -11,6 +11,11 @@ import AppNavigator from "./navigation/AppNavigator";
 
 // App component
 const App = () => {
+  LogBox.ignoreLogs([
+    "Sending `onAnimatedValueUpdate` with no listeners registered",
+    "ViewPropTypes will be removed from React Native, along with all other PropTypes."
+  ]);
+
   const [fontsLoaded] = useFonts({
     ...Ionicons.font,
     "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),

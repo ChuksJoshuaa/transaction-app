@@ -12,19 +12,20 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Loader from "../components/Loader";
 import { useNavigation } from "@react-navigation/native";
+import { validateEmail } from "../utils";
 
 const { width: WIDTH } = Dimensions.get("window");
 
 const SignIn = () => {
   const navigation = useNavigation();
   const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
+    email: "",
     password: "",
     showPass: true,
     press: false,
     loading: true,
+    emailError: "",
+    passwordError: "",
   });
 
   useEffect(() => {
@@ -33,9 +34,65 @@ const SignIn = () => {
     }, 3000);
   }, []);
 
-  const handleInputChange = (name, value) => {
-    setState((prevState) => ({ ...prevState, [name]: value }));
+  
+
+  const validateEmailField = (email) => {
+    if (!email) {
+      setState((prevState) => ({
+        ...prevState,
+        emailError: "Email is required",
+      }));
+      return false;
+    } else if (!validateEmail(email)) {
+      setState((prevState) => ({
+        ...prevState,
+        emailError: "Invalid email format",
+      }));
+      return false;
+    }
+    setState((prevState) => ({ ...prevState, emailError: "" }));
+    return true;
   };
+
+  const validatePasswordField = (password) => {
+    if (!password) {
+      setState((prevState) => ({
+        ...prevState,
+        passwordError: "Password is required",
+      }));
+      return false;
+    } else if (password.length < 6) {
+      setState((prevState) => ({
+        ...prevState,
+        passwordError: "Password must be at least 6 characters",
+      }));
+      return false;
+    }
+    setState((prevState) => ({ ...prevState, passwordError: "" }));
+    return true;
+  };
+
+
+  const handleInputChange = (name, value) => {
+  // Update the input field first
+    setState((prevState) => ({ ...prevState, [name]: value }));
+    if (name === "email") {
+      validateEmailField(value); 
+    } else if (name === "password") {
+      validatePasswordField(value); 
+    }
+  };
+
+  const handleSubmit = () => {
+    const isEmailValid = validateEmailField(state.email);
+    const isPasswordValid = validatePasswordField(state.password);
+
+    if (isEmailValid && isPasswordValid) {
+      navigation.navigate("Main");
+    }
+  };
+
+
 
   return (
     <React.Fragment>
@@ -57,7 +114,12 @@ const SignIn = () => {
               placeholder={"Email"}
               placeholderTextColor={"white"}
               underlineColorAndroid="transparent"
+              value={state.email}
+              onChangeText={(text) => handleInputChange("email", text)}
             />
+            {state.emailError ? (
+              <Text style={styles.errorText}>{state.emailError}</Text>
+            ) : null}
           </View>
           <View style={styles.inputContainer}>
             <MaterialCommunityIcons
@@ -72,17 +134,18 @@ const SignIn = () => {
               secureTextEntry={state.showPass}
               placeholderTextColor={"white"}
               underlineColorAndroid="transparent"
+              value={state.password}
+              onChangeText={(text) => handleInputChange("password", text)}
             />
-
             <TouchableOpacity style={styles.btnEye}>
               <AntDesign name={"eye"} size={22} color={"white"} />
             </TouchableOpacity>
           </View>
+          {state.passwordError ? (
+            <Text style={styles.errorText}>{state.passwordError}</Text>
+          ) : null}
 
-          <TouchableOpacity
-            style={styles.btnLogin}
-            onPress={() => navigation.navigate("Main")}
-          >
+          <TouchableOpacity style={styles.btnLogin} onPress={handleSubmit}>
             <Text style={styles.text}>Continue</Text>
           </TouchableOpacity>
           <Text
@@ -106,6 +169,13 @@ const styles = {
     height: null,
     backgroundColor: "#062b50",
     marginTop: 40,
+  },
+  errorText: {
+    color: "#fff",
+    fontSize: 14,
+    paddingHorizontal: 25,
+    paddingTop: 5,
+    textAlign: "left",
   },
   logoContainer: {
     alignItems: "center",
