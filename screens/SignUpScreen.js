@@ -57,7 +57,7 @@ const SignUp = () => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
-    // Format the date and update the state as needed
+   
     handleDatePicker(currentDate);
   };
 
