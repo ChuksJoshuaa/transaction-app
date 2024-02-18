@@ -22,13 +22,17 @@ const SignUp = () => {
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
-    phoneNumber: "",
+    bvn: "",
     password: "",
     showPass: true,
     press: false,
     isVisible: false,
     chosenDate: "",
     loading: false,
+    firstNameError: "",
+    lastNameError: "",
+    bvnError: "",
+    passwordError: "",
   });
 
   useEffect(() => {
@@ -36,10 +40,6 @@ const SignUp = () => {
       setState((prevState) => ({ ...prevState, loading: false }));
     }, 3000);
   }, []);
-
-  const handleInputChange = (name, value) => {
-    setState((prevState) => ({ ...prevState, [name]: value }));
-  };
 
   const handleDatePicker = (date) => {
     setState((prevState) => ({
@@ -70,13 +70,85 @@ const SignUp = () => {
     showMode("date");
   };
 
+  const validateBvn = (bvn) => {
+    const bvnPattern = /^[0-9]+$/;
+    if (!bvn) {
+      setState((prevState) => ({
+        ...prevState,
+        bvnError: "bvn is required",
+      }));
+      return false;
+    } else if (!bvnPattern.test(bvn)) {
+      setState((prevState) => ({
+        ...prevState,
+        bvnError: "Invalid bvn",
+      }));
+      return false;
+    } else if (bvn.length < 10) {
+      setState((prevState) => ({
+        ...prevState,
+        bvnError: "Bvn must be at least 10 characters",
+      }));
+      return false;
+    }
+    setState((prevState) => ({ ...prevState, bvnError: "" }));
+    return true;
+  };
+
+  const validateFirstName = (firstName) => {
+    if (!firstName) {
+      setState((prevState) => ({
+        ...prevState,
+        firstNameError: "First name is required",
+      }));
+      return false;
+    }
+    setState((prevState) => ({ ...prevState, firstNameError: "" }));
+    return true;
+  };
+
+  const validateLastName = (lastName) => {
+    if (!lastName) {
+      setState((prevState) => ({
+        ...prevState,
+        lastNameError: "Last name is required",
+      }));
+      return false;
+    }
+    setState((prevState) => ({ ...prevState, lastNameError: "" }));
+    return true;
+  };
+
+  const handleInputChange = (name, value) => {
+    setState((prevState) => ({ ...prevState, [name]: value }));
+    if (name === "bvn") {
+      validateBvn(value);
+    } else if (name === "firstName") {
+      validateFirstName(value);
+    } else if (name === "lastName") {
+      validateLastName(value);
+    }
+  };
+
+  const handleSubmit = () => {
+    const isBvnValid = validateBvn(state.bvn);
+    const isFirstNameValid = validateFirstName(state.firstName);
+    const isLastNameValid = validateFirstName(state.lastName);
+
+    if (!state.chosenDate) return alert("Date is required");
+
+    if (isBvnValid && isFirstNameValid && isLastNameValid) {
+      navigation.navigate("Main");
+    }
+  };
+
   return (
     <ImageBackground style={styles.backgroundContainer}>
       <Loader loading={state.loading} />
       <KeyboardAwareScrollView>
-        <View style={[styles.logoContainer, {marginTop: 50}]}>
+        <View style={[styles.logoContainer, { marginTop: 50 }]}>
           <Text style={styles.WelcomeText}>
-            Welcome To Your One Customer Bank
+            Welcome to your customer's bank
           </Text>
           <Text style={styles.introText}>
             Let's set up your account real quick!
@@ -91,10 +163,15 @@ const SignUp = () => {
           />
           <TextInput
             style={styles.input}
+            value={state.bvn}
             placeholder={"Enter your BVN"}
             placeholderTextColor={"white"}
             underlineColorAndroid="transparent"
+            onChangeText={(text) => handleInputChange("bvn", text)}
           />
+          {state.bvnError ? (
+            <Text style={styles.errorText}>{state.bvnError}</Text>
+          ) : null}
         </View>
         <Text style={styles.tipText}>
           Quick Tip: Dial *565*0# on your registered mobile number to get your
@@ -109,13 +186,16 @@ const SignUp = () => {
           />
           <TextInput
             style={styles.input}
+            value={state.firstName}
             placeholder={"First Name"}
             placeholderTextColor={"white"}
             underlineColorAndroid="transparent"
             onChangeText={(text) => handleInputChange("firstName", text)}
           />
+          {state.firstNameError ? (
+            <Text style={styles.errorText}>{state.firstNameError}</Text>
+          ) : null}
         </View>
-
         <View style={styles.inputContainer}>
           <Ionicons
             name={"person"}
@@ -125,13 +205,16 @@ const SignUp = () => {
           />
           <TextInput
             style={styles.input}
+            value={state.lastName}
             placeholder={"Last Name"}
             placeholderTextColor={"white"}
             underlineColorAndroid="transparent"
             onChangeText={(text) => handleInputChange("lastName", text)}
           />
+          {state.lastNameError ? (
+            <Text style={styles.errorText}>{state.lastNameError}</Text>
+          ) : null}
         </View>
-
         <TouchableOpacity
           style={styles.inputContainer}
           onPress={showDatepicker}
@@ -145,7 +228,6 @@ const SignUp = () => {
           <Text style={styles.dateText}>Date of birth</Text>
           <Text style={styles.dateText}>{state.chosenDate}</Text>
         </TouchableOpacity>
-
         {show && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -156,10 +238,7 @@ const SignUp = () => {
             onChange={onChange}
           />
         )}
-        <TouchableOpacity
-          style={styles.btnLogin}
-          onPress={() => navigation.navigate("Main")}
-        >
+        <TouchableOpacity style={styles.btnLogin} onPress={handleSubmit}>
           <Text style={styles.text}>Continue</Text>
         </TouchableOpacity>
         <Text
@@ -183,9 +262,17 @@ const styles = {
     backgroundColor: "#062b50",
     marginTop: 40,
   },
+  errorText: {
+    color: "#fff",
+    fontSize: 14,
+    paddingHorizontal: 25,
+    paddingTop: 5,
+    textAlign: "left",
+  },
   logoContainer: {
     alignItems: "center",
     marginBottom: 10,
+    marginHorizontal: 25,
   },
   logo: {
     width: 120,
@@ -216,6 +303,7 @@ const styles = {
     marginTop: 5,
     padding: 10,
     textDecorationLine: "underline",
+    marginHorizontal: 25,
   },
   input: {
     width: WIDTH - 55,
@@ -225,7 +313,6 @@ const styles = {
     paddingLeft: 70,
     backgroundColor: "rgba(0, 0, 0, 0.35)",
     color: "white",
-    // marginHoriontal: 25,
   },
   dateText: {
     color: "white",
@@ -244,6 +331,7 @@ const styles = {
   },
   inputContainer: {
     marginTop: 5,
+    marginHorizontal: 25,
   },
   btnEye: {
     position: "absolute",
@@ -257,6 +345,7 @@ const styles = {
     backgroundColor: "#fcbb16",
     justifyContent: "center",
     marginTop: 20,
+    marginHorizontal: 25,
   },
   text: {
     color: "white",
