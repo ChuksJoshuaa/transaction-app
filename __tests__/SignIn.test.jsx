@@ -1,6 +1,6 @@
 import React from "react";
 import { fireEvent, render, waitFor } from "@testing-library/react-native";
-import { SignIn } from "../screens";
+import { SignIn } from "../screens/index";
 
 // Mocking modules
 jest.mock("@react-navigation/native", () => {
