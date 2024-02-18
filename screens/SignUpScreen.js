@@ -28,7 +28,7 @@ const SignUp = () => {
     press: false,
     isVisible: false,
     chosenDate: "",
-    loading: false,
+    loading: true,
     firstNameError: "",
     lastNameError: "",
     bvnError: "",
@@ -80,22 +80,22 @@ const SignUp = () => {
   const handleReset = () => {
     setState({
       firstName: "",
-    lastName: "",
-    bvn: "",
-    password: "",
-    showPass: true,
-    press: false,
-    isVisible: false,
-    chosenDate: "",
-    loading: false,
-    firstNameError: "",
-    lastNameError: "",
-    bvnError: "",
-    passwordError: "",
-    })
-  }
+      lastName: "",
+      bvn: "",
+      password: "",
+      showPass: true,
+      press: false,
+      isVisible: false,
+      chosenDate: "",
+      loading: false,
+      firstNameError: "",
+      lastNameError: "",
+      bvnError: "",
+      passwordError: "",
+    });
+  };
 
-  // Refactor your validation functions to use setError
+ 
   const validateBvn = (bvn) => {
     const bvnPattern = /^[0-9]+$/;
     if (!bvn) {
@@ -108,7 +108,7 @@ const SignUp = () => {
       setError("bvn", "BVN must be at least 10 characters");
       return false;
     }
-    setError("bvn", ""); 
+    setError("bvn", "");
     return true;
   };
 
@@ -117,7 +117,7 @@ const SignUp = () => {
       setError("firstName", "First name is required");
       return false;
     }
-    setError("firstName", ""); 
+    setError("firstName", "");
     return true;
   };
 
@@ -126,11 +126,11 @@ const SignUp = () => {
       setError("lastName", "Last name is required");
       return false;
     }
-    setError("lastName", ""); 
+    setError("lastName", "");
     return true;
   };
 
-  // Update the handleInputChange function accordingly
+ 
   const handleInputChange = (name, value) => {
     setState((prevState) => ({ ...prevState, [name]: value }));
     if (name === "bvn") {
@@ -140,7 +140,7 @@ const SignUp = () => {
     } else if (name === "lastName") {
       validateLastName(value);
     }
-    // Add other fields as needed
+    
   };
 
   const handleSubmit = () => {
@@ -152,7 +152,7 @@ const SignUp = () => {
       navigation.navigate("Main");
     }
 
-    handleReset()
+    handleReset();
   };
 
   return (

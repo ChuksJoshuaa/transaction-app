@@ -1,17 +1,16 @@
 import { AntDesign, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import {
   Dimensions,
-  Image,
   ImageBackground,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Loader from "../components/Loader";
-import { useNavigation } from "@react-navigation/native";
 import { validateEmail } from "../utils";
 
 const { width: WIDTH } = Dimensions.get("window");
@@ -34,7 +33,17 @@ const SignIn = () => {
     }, 3000);
   }, []);
 
-  
+  const handleReset = () => {
+    setState({
+      email: "",
+      password: "",
+      showPass: true,
+      press: false,
+      loading: true,
+      emailError: "",
+      passwordError: "",
+    })
+  }
 
   const validateEmailField = (email) => {
     if (!email) {
@@ -74,7 +83,7 @@ const SignIn = () => {
 
 
   const handleInputChange = (name, value) => {
-  // Update the input field first
+  
     setState((prevState) => ({ ...prevState, [name]: value }));
     if (name === "email") {
       validateEmailField(value); 
@@ -90,6 +99,8 @@ const SignIn = () => {
     if (isEmailValid && isPasswordValid) {
       navigation.navigate("Main");
     }
+
+    handleReset()
   };
 
 
