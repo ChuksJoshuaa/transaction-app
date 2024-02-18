@@ -17,7 +17,8 @@ import {
   TransactionInformation,
   Transfer,
 } from "../screens";
-import MainTabNavigator from "./MainTabNavigator";
+
+import AppNavigator from "./AppNavigator"
 
 const Drawer = createDrawerNavigator();
 
@@ -42,13 +43,14 @@ const CustomDrawerContent = (props) => {
 const TransactionStackNavigator = () => {
   return (
     <Drawer.Navigator
+      initialRouteName="Dashboard"
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         drawerActiveTintColor: "orange",
         headerShown: false,
       }}
     >
-      {/* <Drawer.Screen name="Main" component={MainTabNavigator} /> */}
+      <Drawer.Screen name="Dashboard" component={AppNavigator} />
       <Drawer.Screen name="TRANSACTIONS" component={Transaction} />
       <Drawer.Screen name="TRANSFER" component={Transfer} />
       <Drawer.Screen name="PAYBILLS" component={PayBills} />

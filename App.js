@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect } from "react";
+import { LogBox } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import {LogBox} from "react-native"
 // Expo imports
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 // Navigation imports
-import AppNavigator from "./navigation/AppNavigator";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import AppNavigator from "./navigation/DrawerNavigation";
 
 // App component
 const App = () => {
@@ -22,6 +23,15 @@ const App = () => {
     ionicon: require("./assets/fonts/Ionicons.ttf"),
   });
 
+
+const AppTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "rgb(255, 45, 85)",
+  },
+};
+
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
@@ -35,9 +45,11 @@ const App = () => {
   if (!fontsLoaded) return null;
 
   return (
-      <SafeAreaProvider style={{ flex: 1 }}>
+    <SafeAreaProvider style={{ flex: 1 }}>
+      <NavigationContainer theme={AppTheme}>
         <AppNavigator />
-      </SafeAreaProvider>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

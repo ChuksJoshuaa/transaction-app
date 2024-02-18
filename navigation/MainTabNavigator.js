@@ -1,8 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { Platform } from "react-native";
 import TabBarIcon from "../components/TabBarIcon";
-import { HomeScreen, LinksScreen, SettingsScreen } from "../screens";
+import { SettingsScreen, TransactionInformation, Transfer } from "../screens";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,34 +13,25 @@ export default function MainTabNavigator() {
 
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-
-          if (route.name === "Home") {
+          if (route.name === "TRANSACTIONS") {
             iconName = focused
               ? "information-circle"
               : "information-circle-outline";
-          } else if (route.name === "Links") {
+          } else if (route.name === "TRANSFER") {
             iconName = "link";
-          } else if (route.name === "Settings") {
+          } else if (route.name === "SETTINGS") {
             iconName = "options";
           }
-
-          // You can return any component that you like here!
-          return (
-            <TabBarIcon
-              name={
-                Platform.OS === "ios" ? `ios-${iconName}` : `md-${iconName}`
-              }
-              focused={focused}
-            />
-          );
+          return <TabBarIcon name={iconName} focused={focused} />;
         },
         tabBarActiveTintColor: "#008CFE",
         tabBarInactiveTintColor: "#828282",
       })}
+      initialRouteName="TRANSACTIONS"
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Links" component={LinksScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="TRANSACTIONS" component={TransactionInformation} />
+      <Tab.Screen name="TRANSFER" component={Transfer} />
+      <Tab.Screen name="SETTINGS" component={SettingsScreen} />
     </Tab.Navigator>
   );
 }
