@@ -70,55 +70,67 @@ const SignUp = () => {
     showMode("date");
   };
 
+  const setError = (fieldName, errorMessage) => {
+    setState((prevState) => ({
+      ...prevState,
+      [`${fieldName}Error`]: errorMessage,
+    }));
+  };
+
+  const handleReset = () => {
+    setState({
+      firstName: "",
+    lastName: "",
+    bvn: "",
+    password: "",
+    showPass: true,
+    press: false,
+    isVisible: false,
+    chosenDate: "",
+    loading: false,
+    firstNameError: "",
+    lastNameError: "",
+    bvnError: "",
+    passwordError: "",
+    })
+  }
+
+  // Refactor your validation functions to use setError
   const validateBvn = (bvn) => {
     const bvnPattern = /^[0-9]+$/;
     if (!bvn) {
-      setState((prevState) => ({
-        ...prevState,
-        bvnError: "bvn is required",
-      }));
+      setError("bvn", "BVN is required");
       return false;
     } else if (!bvnPattern.test(bvn)) {
-      setState((prevState) => ({
-        ...prevState,
-        bvnError: "Invalid bvn",
-      }));
+      setError("bvn", "Invalid BVN");
       return false;
     } else if (bvn.length < 10) {
-      setState((prevState) => ({
-        ...prevState,
-        bvnError: "Bvn must be at least 10 characters",
-      }));
+      setError("bvn", "BVN must be at least 10 characters");
       return false;
     }
-    setState((prevState) => ({ ...prevState, bvnError: "" }));
+    setError("bvn", ""); 
     return true;
   };
 
   const validateFirstName = (firstName) => {
     if (!firstName) {
-      setState((prevState) => ({
-        ...prevState,
-        firstNameError: "First name is required",
-      }));
+      setError("firstName", "First name is required");
       return false;
     }
-    setState((prevState) => ({ ...prevState, firstNameError: "" }));
+    setError("firstName", ""); 
     return true;
   };
 
   const validateLastName = (lastName) => {
     if (!lastName) {
-      setState((prevState) => ({
-        ...prevState,
-        lastNameError: "Last name is required",
-      }));
+      setError("lastName", "Last name is required");
       return false;
     }
-    setState((prevState) => ({ ...prevState, lastNameError: "" }));
+    setError("lastName", ""); 
     return true;
   };
 
+  // Update the handleInputChange function accordingly
   const handleInputChange = (name, value) => {
     setState((prevState) => ({ ...prevState, [name]: value }));
     if (name === "bvn") {
@@ -128,6 +140,7 @@ const SignUp = () => {
     } else if (name === "lastName") {
       validateLastName(value);
     }
+    // Add other fields as needed
   };
 
   const handleSubmit = () => {
@@ -135,11 +148,11 @@ const SignUp = () => {
     const isFirstNameValid = validateFirstName(state.firstName);
     const isLastNameValid = validateFirstName(state.lastName);
 
-    if (!state.chosenDate) return alert("Date is required");
-
     if (isBvnValid && isFirstNameValid && isLastNameValid) {
       navigation.navigate("Main");
     }
+
+    handleReset()
   };
 
   return (
